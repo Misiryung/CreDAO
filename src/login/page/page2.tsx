@@ -6,7 +6,7 @@ const Page2: React.FC = () => {
   return (
     <Paper
       sx={{
-        width: "25vw",
+        width: "30vw",
         height: "100vh",
         bgcolor: "#FFF",
         boxShadow: "none",
