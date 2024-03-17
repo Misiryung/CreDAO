@@ -30,7 +30,7 @@ export default function CompleteButtons() {
         返回
       </Typography>
       <CompleteButton variant="contained" fullWidth disableRipple>
-        完成登录
+        完成
       </CompleteButton>
     </Box>
   );
