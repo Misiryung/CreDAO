@@ -1,0 +1,60 @@
+import * as React from "react";
+import { Box, Typography, styled } from "@mui/material";
+import Button from "@mui/material/Button";
+
+const LoginButton = styled(Button)({
+  fontSize: 16,
+  padding: "6px 12px",
+  backgroundColor: "#000",
+  borderRadius: 10, // 添加圆角属性
+  "&:hover": {
+    backgroundColor: "#000",
+  },
+  "&:active": {
+    backgroundColor: "#000",
+  },
+});
+
+const RegisterButton = styled(Button)({
+    fontSize: 16,
+    padding: "6px 12px",
+    border: "1.6px solid #000", // 设置边框
+    borderRadius: 10, // 添加圆角属性
+    color: "#000", // 设置字体颜色
+    "&:hover": {
+      border: "1.6px solid #000", // 设置边框
+      backgroundColor: "transparent", // 设置背景为无填充
+    },
+    "&:active": {
+      border: "1.6px solid #000", // 设置边框
+    },
+    "&:focus": {
+      border: "1.6px solid #000", // 设置边框
+    },
+  });
+  
+  
+
+export default function LoginButtons() {
+  return (
+    <Box display="flex" flexDirection="column" alignItems="center" width="100%">
+      <LoginButton variant="contained" fullWidth disableRipple>
+        登录
+      </LoginButton>
+
+      <Typography
+        variant="body1"
+        style={{
+          fontSize: "16px",
+          color: "#000",
+        }}
+      >
+        or
+      </Typography>
+
+      <RegisterButton variant="outlined" fullWidth disableRipple>
+        注册
+      </RegisterButton>
+    </Box>
+  );
+}
