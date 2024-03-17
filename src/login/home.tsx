@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, CssBaseline } from "@mui/material";
-import Page2 from "./page/page2";
+import Page3 from "./page/page3";
 
 const LoginPage: React.FC = () => {
   return (
@@ -29,10 +29,9 @@ const LoginPage: React.FC = () => {
             width: "100%",
             height: "100%",
             objectFit: "cover",
-
           }}
         />
-        <Page2 />
+        <Page3 />
       </Box>
     </>
   );
