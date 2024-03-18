@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Box, Typography } from "@mui/material";
-import { SelectedIcon, UnselectedIcon } from '../icons';
+import { SelectedIcon, UnselectedIcon } from "../icons";
 
 const SelectBox = () => {
   const [checked, setChecked] = useState(false);
@@ -17,11 +17,14 @@ const SelectBox = () => {
         alignItems: "center",
         justifyContent: "center",
         "& > :not(:last-child)": {
-          marginRight: "10px", // 添加内部元素之间的间距
+          marginRight: "10px",
         },
       }}
     >
-      <Box sx={{ display: "flex", alignItems: "center" }} onClick={toggleChecked}>
+      <Box
+        sx={{ display: "flex", alignItems: "center" }}
+        onClick={toggleChecked}
+      >
         {checked ? (
           <SelectedIcon width={16} height={16} fill="#000" />
         ) : (
@@ -42,4 +45,3 @@ const SelectBox = () => {
 };
 
 export default SelectBox;
-
