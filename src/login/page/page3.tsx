@@ -1,6 +1,6 @@
 import React from "react";
 import { Paper, Box, Typography } from "@mui/material";
-import MnemonicImport from "../components/privatekey";
+import MnemonicImport from "../components/importprivatekey";
 import CompleteButtons from "../components/completebutton";
 
 const Page3: React.FC = () => {
