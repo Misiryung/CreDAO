@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Box, styled, TextField, InputAdornment, Paper } from "@mui/material";
 import { VisibilityIcon, VisibilityOffIcon } from "../icons";
 
-const PasswordTextField = styled(TextField)({
+const PrivatekeyTextField = styled(TextField)({
   "& label.Mui-focused": {
     color: "#000",
   },
@@ -31,7 +31,7 @@ const CustomPaper = styled(Paper)({
   boxShadow: "none", // Remove shadow
 });
 
-export default function PasswordTextFields() {
+export default function ImportPrivatekey() {
   const [showPasswords, setShowPasswords] = useState([
     false,
     false,
@@ -67,7 +67,7 @@ export default function PasswordTextFields() {
             const index = row * 3 + col;
             return (
               <Box key={index} width="30%">
-                <PasswordTextField
+                <PrivatekeyTextField
                   id={`password-${index}`}
                   type={showPasswords[index] ? "text" : "password"}
                   fullWidth
