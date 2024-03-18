@@ -30,7 +30,7 @@ export default function NextstepButtons() {
         返回
       </Typography>
       <NextstepButton variant="contained" fullWidth disableRipple>
-        登录
+        下一步
       </NextstepButton>
     </Box>
   );
