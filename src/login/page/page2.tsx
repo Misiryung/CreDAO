@@ -1,67 +1,56 @@
 import React from "react";
-import { Paper, Box, Typography } from "@mui/material";
-import ImportWalletButtons from "../components/importwallet";
+import { Box, Typography } from "@mui/material";
+import ImportWalletButtons from "../button/importwalletbutton";
+import CreateWalletButtons from "../button/createwalletbutton";
 
 const Page2: React.FC = () => {
   return (
-    <Paper
+    <Box
       sx={{
-        width: "30vw",
-        height: "100vh",
-        bgcolor: "#FFF",
-        boxShadow: "none",
-        borderRadius: 0,
-        border: "none",
-        position: "relative",
+        width: "100%",
         display: "flex",
-        justifyContent: "center",
+        flexDirection: "column",
         alignItems: "center",
       }}
     >
+      <Typography
+        variant="h1"
+        style={{
+          fontWeight: "bold",
+          fontSize: "32px",
+          color: "#000",
+          textAlign: "left",
+          marginRight: "auto",
+        }}
+      >
+        钱包
+      </Typography>
+      <Typography
+        variant="body1"
+        style={{
+          marginTop: "50px",
+          fontSize: "18px",
+          color: "#000",
+          textAlign: "left",
+          marginRight: "auto",
+        }}
+      >
+        第一次使用区块链钱包？
+      </Typography>
       <Box
         sx={{
-          width: "80%",
+          width: "100%",
+          marginTop: "50px",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          position: "absolute",
-          top: "16%",
+          gap: "20px",
         }}
       >
-        <Typography
-          variant="h1"
-          style={{
-            fontWeight: "bold",
-            fontSize: "32px",
-            color: "#000",
-            textAlign: "left",
-            marginRight: "auto",
-          }}
-        >
-          钱包
-        </Typography>
-        <Typography
-          variant="body1"
-          style={{
-            marginTop: "50px",
-            fontSize: "18px",
-            color: "#000",
-            textAlign: "left",
-            marginRight: "auto",
-          }}
-        >
-          第一次使用区块链钱包？
-        </Typography>
-        <Box
-          sx={{
-            width: "100%",
-            marginTop: "50px",
-          }}
-        >
-          <ImportWalletButtons />
-        </Box>
+        <ImportWalletButtons />
+        <CreateWalletButtons />
       </Box>
-    </Paper>
+    </Box>
   );
 };
 
