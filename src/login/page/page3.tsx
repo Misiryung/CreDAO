@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
-import MnemonicImport from "../components/importprivatekey";
-import CompleteButtons from "../components/completebutton";
+import ImportPrivatekey from "../components/importprivatekey";
+import CompleteButtons from "../button/completebutton";
 
 const Page3: React.FC = () => {
   return (
@@ -62,9 +62,13 @@ const Page3: React.FC = () => {
         sx={{
           width: "100%",
           marginTop: "50px",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: "10px",
         }}
       >
-        <MnemonicImport />
+        <ImportPrivatekey />
       </Box>
       <Box
         sx={{
