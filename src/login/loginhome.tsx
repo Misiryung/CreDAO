@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, CssBaseline, Paper } from "@mui/material";
-import Page3 from "./page/page3";
+import Page5 from "./page/page5";
 
 const LoginHome: React.FC = () => {
   return (
@@ -32,7 +32,7 @@ const LoginHome: React.FC = () => {
         />
         <Paper
           sx={{
-            width: "28vw",
+            width: "30vw",
             height: "100vh",
             bgcolor: "#FFF",
             boxShadow: "none",
@@ -51,7 +51,7 @@ const LoginHome: React.FC = () => {
               top: "16%",
             }}
           >
-            <Page3 />
+            <Page5 />
           </Box>
         </Paper>
       </Box>
