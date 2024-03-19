@@ -2,7 +2,7 @@ import * as React from "react";
 import { Box, Typography, styled } from "@mui/material";
 import Button from "@mui/material/Button";
 
-const CreateButton = styled(Button)({
+const CreatedButton = styled(Button)({
   fontSize: 16,
   padding: "6px 12px",
   backgroundColor: "#000",
@@ -15,7 +15,7 @@ const CreateButton = styled(Button)({
   },
 });
 
-export default function CreateButtons() {
+export default function CreatedButtons() {
   return (
     <Box display="flex" flexDirection="row" alignItems="center" width="100%">
       <Typography
@@ -29,9 +29,9 @@ export default function CreateButtons() {
       >
         返回
       </Typography>
-      <CreateButton variant="contained" fullWidth disableRipple>
+      <CreatedButton variant="contained" fullWidth disableRipple>
         完成创建
-      </CreateButton>
+      </CreatedButton>
     </Box>
   );
 }
