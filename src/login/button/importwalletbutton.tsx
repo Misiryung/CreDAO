@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Box, Paper, Typography, styled } from "@mui/material";
+import { Paper, Typography, styled } from "@mui/material";
 import Button from "@mui/material/Button";
 
 const ImportWalletButton = styled(Button)({
@@ -27,7 +27,7 @@ export default function ImportWalletButtons() {
         alignItems: "center",
         gap: "10px",
         backgroundColor: "transparent",
-        border: "1.6px solid black",
+        border: "1px solid black",
         borderRadius: "10px",
       }}
     >
