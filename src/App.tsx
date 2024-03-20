@@ -10,6 +10,7 @@ const App: React.FC = () => (
     <Box sx={{ backgroundColor: "#FFF" }}>
       <Routes>
         <Route path="/" element={<LoginHome />} />
+        <Route path="/首页" element={<Feed />} />
         <Route path="/video/:id" element={<VideoDetail />} />
         <Route path="/search/:searchTerm" element={<Feed />} />
       </Routes>
