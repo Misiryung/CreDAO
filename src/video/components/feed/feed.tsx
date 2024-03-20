@@ -5,6 +5,7 @@ import { searchVideos } from "../../api";
 import VideoList from "../video/list";
 import { VideoTypes } from "../video/types";
 import Sidebar from "../sidebar/sidebar";
+import Navbar from "../navbar/navbar";
 
 const Feed: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>("New");
@@ -49,35 +50,45 @@ const Feed: React.FC = () => {
   };
 
   return (
-    <Stack direction={{ xs: "column", md: "row" }}>
-      <Box
-        sx={{
-          width: "200px",
-          height: "92vh",
-          px: "5px",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-          overflowY: "hidden",
-        }}
-      >
-        <Sidebar
-          selectedCategory={selectedCategory}
-          setSelectedCategory={setSelectedCategory}
-          handleCategoryChange={handleCategoryChange}
-        />
-
-        <Typography
-          variant="body2"
-          sx={{ textAlign: "center", color: "#7F7F7F" }}
+    <Box
+      sx={{
+        width: "100%",
+        height: "100%",
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
+      <Navbar />
+      <Stack direction={{ xs: "column", md: "row" }}>
+        <Box
+          sx={{
+            width: "200px",
+            height: "92vh",
+            px: "5px",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+            overflowY: "hidden",
+          }}
         >
-          © CreDAO Users Version
-        </Typography>
-      </Box>
-      <Box p={0} sx={{ overflowY: "auto", height: "92vh", flex: 2 }}>
-        <VideoList videoList={videos || []} maxCards={20} />
-      </Box>
-    </Stack>
+          <Sidebar
+            selectedCategory={selectedCategory}
+            setSelectedCategory={setSelectedCategory}
+            handleCategoryChange={handleCategoryChange}
+          />
+
+          <Typography
+            variant="body2"
+            sx={{ textAlign: "center", color: "#7F7F7F" }}
+          >
+            © CreDAO Users Version
+          </Typography>
+        </Box>
+        <Box p={0} sx={{ overflowY: "auto", height: "92vh", flex: 2 }}>
+          <VideoList videoList={videos || []} maxCards={20} />
+        </Box>
+      </Stack>
+    </Box>
   );
 };
 
