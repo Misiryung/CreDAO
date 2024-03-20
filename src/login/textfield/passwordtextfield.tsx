@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { Box, styled, TextField, InputAdornment } from '@mui/material';
-import { VisibilityIcon, VisibilityOffIcon } from '../icons';
+import React, { useState } from "react";
+import { Box, styled, TextField, InputAdornment } from "@mui/material";
+import { VisibilityIcon, VisibilityOffIcon } from "../icons";
 
 const PasswordTextField = styled(TextField)({
   "& label.Mui-focused": {
@@ -10,11 +10,11 @@ const PasswordTextField = styled(TextField)({
     borderRadius: "8px",
     "& fieldset": {
       borderColor: "#000",
-      borderWidth: "1.6px",
+      borderWidth: "1.2px",
     },
     "&.Mui-focused fieldset": {
       borderColor: "#000",
-      borderWidth: "2px",
+      borderWidth: "1.6px",
     },
   },
 });
@@ -27,7 +27,7 @@ export default function PasswordTextFields() {
   return (
     <PasswordTextField
       id="outlined-adornment-password"
-      type={showPassword ? 'text' : 'password'}
+      type={showPassword ? "text" : "password"}
       label="请输入密码"
       fullWidth
       size="small"
@@ -37,9 +37,14 @@ export default function PasswordTextFields() {
             <Box
               component="button"
               aria-label="toggle password visibility"
-              alignItems= "center"
+              alignItems="center"
               onClick={handleClickShowPassword}
-              sx={{ border: 'none', background: 'none', cursor: 'pointer', padding: 0 }}
+              sx={{
+                border: "none",
+                background: "none",
+                cursor: "pointer",
+                padding: 0,
+              }}
             >
               {showPassword ? (
                 <VisibilityIcon width={20} height={20} fill="#000" />
