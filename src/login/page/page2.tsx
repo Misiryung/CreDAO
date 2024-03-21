@@ -3,7 +3,11 @@ import { Box, Typography } from "@mui/material";
 import ImportWalletButtons from "../button/importwalletbutton";
 import CreateWalletButtons from "../button/createwalletbutton";
 
-const Page2: React.FC = () => {
+interface Page2Props {
+  onBack: () => void; // 定义onBack属性为函数类型，没有参数和返回值
+}
+
+const Page2: React.FC<Page2Props> = ({ onBack }) => {
   return (
     <Box
       sx={{
@@ -49,6 +53,17 @@ const Page2: React.FC = () => {
       >
         <ImportWalletButtons />
         <CreateWalletButtons />
+        <Typography
+          variant="body1"
+          style={{
+            fontSize: "16px",
+            color: "#000",
+            cursor: "pointer",
+          }}
+          onClick={onBack}
+        >
+          返回
+        </Typography>
       </Box>
     </Box>
   );
