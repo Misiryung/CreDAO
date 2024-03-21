@@ -10,11 +10,11 @@ const PrivatekeyTextField = styled(TextField)({
     borderRadius: "8px",
     "& fieldset": {
       borderColor: "#000",
-      borderWidth: "1.6px",
+      borderWidth: "1.2px",
     },
     "&.Mui-focused fieldset": {
       borderColor: "#000",
-      borderWidth: "2px",
+      borderWidth: "1.6px",
     },
   },
 });
@@ -26,7 +26,7 @@ const PrivatekeyPaper = styled(Paper)({
   flexDirection: "column",
   alignItems: "center",
   backgroundColor: "transparent",
-  border: "1.6px solid black",
+  border: "1.2px solid black",
   borderRadius: "10px",
   boxShadow: "none",
   "> *:not(:last-child)": {
