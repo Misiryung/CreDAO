@@ -33,7 +33,11 @@ const RegisterButton = styled(Button)({
   },
 });
 
-export default function LoginButtons() {
+interface LoginButtonsProps {
+  onRegisterClick: () => void; // Define the prop for onRegisterClick function
+}
+
+const LoginButtons: React.FC<LoginButtonsProps> = ({ onRegisterClick }) => {
   return (
     <Box display="flex" flexDirection="column" alignItems="center" width="100%">
       <LoginButton variant="contained" fullWidth disableRipple>
@@ -50,9 +54,16 @@ export default function LoginButtons() {
         or
       </Typography>
 
-      <RegisterButton variant="outlined" fullWidth disableRipple>
+      <RegisterButton
+        variant="outlined"
+        fullWidth
+        disableRipple
+        onClick={onRegisterClick}
+      >
         注册
       </RegisterButton>
     </Box>
   );
-}
+};
+
+export default LoginButtons;
