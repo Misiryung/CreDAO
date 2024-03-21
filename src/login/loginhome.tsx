@@ -1,8 +1,52 @@
 import React from "react";
 import { Box, CssBaseline, Paper } from "@mui/material";
+import { useState } from "react";
+import Page1 from "./page/page1"; // Import other page components
+import Page2 from "./page/page2";
+import Page3 from "./page/page3";
+import Page4 from "./page/page4";
 import Page5 from "./page/page5";
 
 const LoginHome: React.FC = () => {
+  const [currentPage, setCurrentPage] = useState("page1");
+
+  const handleRegisterClick = () => {
+    switch (currentPage) {
+      case "page1":
+        setCurrentPage("page2");
+        break;
+      case "page2":
+        setCurrentPage("page1");
+        break;
+      case "page3":
+        setCurrentPage("page2");
+        break;
+      case "page4":
+        setCurrentPage("page2");
+        break;
+      case "page5":
+        setCurrentPage("page2");
+        break;
+    }
+  };
+
+  const renderPage = () => {
+    switch (currentPage) {
+      case "page1":
+        return <Page1 onRegisterClick={handleRegisterClick} />;
+      case "page2":
+        return <Page2 onBack={() => setCurrentPage("page1")} />;
+      case "page3":
+        return <Page3 />;
+      case "page4":
+        return <Page4 />;
+      case "page5":
+        return <Page5 />;
+      default:
+        return null;
+    }
+  };
+
   return (
     <>
       <CssBaseline />
@@ -51,7 +95,7 @@ const LoginHome: React.FC = () => {
               top: "16%",
             }}
           >
-            <Page5 />
+            {renderPage()}
           </Box>
         </Paper>
       </Box>
