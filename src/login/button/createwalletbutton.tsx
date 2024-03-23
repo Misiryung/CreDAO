@@ -15,7 +15,13 @@ const CreateWalletButton = styled(Button)({
   },
 });
 
-export default function CreateWalletButtons() {
+interface CreateWalletButtonsProps {
+  onButtonClick2: () => void; // Define the prop for onRegisterClick function
+}
+
+const CreateWalletButtons: React.FC<CreateWalletButtonsProps> = ({
+  onButtonClick2,
+}) => {
   return (
     <Paper
       elevation={0}
@@ -41,9 +47,16 @@ export default function CreateWalletButtons() {
       >
         我是新手，马上开始创建
       </Typography>
-      <CreateWalletButton variant="contained" fullWidth disableRipple>
+      <CreateWalletButton
+        variant="contained"
+        fullWidth
+        disableRipple
+        onClick={onButtonClick2}
+      >
         创建钱包
       </CreateWalletButton>
     </Paper>
   );
-}
+};
+
+export default CreateWalletButtons;
