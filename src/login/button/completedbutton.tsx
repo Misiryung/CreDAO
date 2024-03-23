@@ -1,6 +1,5 @@
 import * as React from "react";
-import { Box, Typography, styled } from "@mui/material";
-import Button from "@mui/material/Button";
+import { styled, Button } from "@mui/material";
 
 const CompletedButton = styled(Button)({
   fontSize: 16,
