@@ -5,9 +5,11 @@ import PasswordTextFields from ".././textfield/passwordtextfield";
 import SelectBox from "../components/selectbox";
 import LoginButtons from ".././button/loginbutton";
 
-const Page1: React.FC<{ onRegisterClick: () => void }> = ({
-  onRegisterClick,
-}) => {
+interface Page1Props {
+  onButtonClick1: () => void;
+}
+
+const Page1: React.FC<Page1Props> = ({ onButtonClick1 }) => {
   return (
     <Box
       sx={{
@@ -93,7 +95,7 @@ const Page1: React.FC<{ onRegisterClick: () => void }> = ({
           alignItems: "center",
         }}
       >
-        <LoginButtons onRegisterClick={onRegisterClick} />
+        <LoginButtons onButtonClick1={onButtonClick1} />
       </Box>
     </Box>
   );
