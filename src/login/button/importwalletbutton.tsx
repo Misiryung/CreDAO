@@ -15,7 +15,13 @@ const ImportWalletButton = styled(Button)({
   },
 });
 
-export default function ImportWalletButtons() {
+interface ImportWalletButtonsProps {
+  onButtonClick1: () => void; // Define the prop for onRegisterClick function
+}
+
+const ImportWalletButtons: React.FC<ImportWalletButtonsProps> = ({
+  onButtonClick1,
+}) => {
   return (
     <Paper
       elevation={0}
@@ -41,9 +47,16 @@ export default function ImportWalletButtons() {
       >
         不是，我已经有助记词/钱包了
       </Typography>
-      <ImportWalletButton variant="contained" fullWidth disableRipple>
+      <ImportWalletButton
+        variant="contained"
+        fullWidth
+        disableRipple
+        onClick={onButtonClick1}
+      >
         导入钱包
       </ImportWalletButton>
     </Paper>
   );
-}
+};
+
+export default ImportWalletButtons;
