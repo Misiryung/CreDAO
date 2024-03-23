@@ -4,7 +4,12 @@ import ImportPrivatekey from "../components/importprivatekey";
 import NextstepButtons from "../button/nextstepbutton";
 import CopyBox from "../components/copybox";
 
-const Page4: React.FC = () => {
+interface Page4Props {
+  onBack3: () => void;
+  onButtonClick4: () => void;
+}
+
+const Page4: React.FC<Page4Props> = ({ onBack3, onButtonClick4 }) => {
   return (
     <Box
       sx={{
@@ -78,7 +83,7 @@ const Page4: React.FC = () => {
           marginTop: "80px",
         }}
       >
-        <NextstepButtons />
+        <NextstepButtons onButtonClick4={onButtonClick4} onBack3={onBack3} />
       </Box>
     </Box>
   );
