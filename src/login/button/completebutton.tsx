@@ -1,6 +1,6 @@
 import * as React from "react";
-import { Box, Typography, styled } from "@mui/material";
-import Button from "@mui/material/Button";
+import { useNavigate } from "react-router-dom";
+import { Box, Typography, styled, Button } from "@mui/material";
 
 const CompleteButton = styled(Button)({
   fontSize: 16,
@@ -15,7 +15,15 @@ const CompleteButton = styled(Button)({
   },
 });
 
-export default function CompleteButtons() {
+interface CompleteButtonsProps {
+  onBack2: () => void;
+}
+
+const CompleteButtons: React.FC<CompleteButtonsProps> = ({ onBack2 }) => {
+  const navigate = useNavigate();
+  const handleComplete = () => {
+    navigate("/首页");
+  };
   return (
     <Box display="flex" flexDirection="row" alignItems="center" width="100%">
       <Typography
@@ -26,12 +34,20 @@ export default function CompleteButtons() {
           color: "#000",
           textAlign: "left",
         }}
+        onClick={onBack2}
       >
         返回
       </Typography>
-      <CompleteButton variant="contained" fullWidth disableRipple>
+      <CompleteButton
+        variant="contained"
+        fullWidth
+        disableRipple
+        onClick={handleComplete}
+      >
         完成
       </CompleteButton>
     </Box>
   );
-}
+};
+
+export default CompleteButtons;
