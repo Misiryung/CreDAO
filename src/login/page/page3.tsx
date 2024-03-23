@@ -3,7 +3,11 @@ import { Box, Typography } from "@mui/material";
 import ImportPrivatekey from "../components/importprivatekey";
 import CompleteButtons from "../button/completebutton";
 
-const Page3: React.FC = () => {
+interface Page3Props {
+  onBack2: () => void;
+}
+
+const Page3: React.FC<Page3Props> = ({ onBack2 }) => {
   return (
     <Box
       sx={{
@@ -76,7 +80,7 @@ const Page3: React.FC = () => {
           marginTop: "80px",
         }}
       >
-        <CompleteButtons />
+        <CompleteButtons onBack2={onBack2} />
       </Box>
     </Box>
   );
