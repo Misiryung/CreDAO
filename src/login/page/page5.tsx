@@ -3,7 +3,11 @@ import { Box, Typography } from "@mui/material";
 import ImportPrivatekey from "../components/importprivatekey";
 import CreatedButtons from "../button/createdbutton";
 
-const Page5: React.FC = () => {
+interface Page5Props {
+  onBack4: () => void;
+}
+
+const Page5: React.FC<Page5Props> = ({ onBack4 }) => {
   return (
     <Box
       sx={{
@@ -76,7 +80,7 @@ const Page5: React.FC = () => {
           marginTop: "80px",
         }}
       >
-        <CreatedButtons />
+        <CreatedButtons onBack4={onBack4} />
       </Box>
     </Box>
   );
