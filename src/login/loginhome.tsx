@@ -10,44 +10,29 @@ import Page5 from "./page/page5";
 const LoginHome: React.FC = () => {
   const [currentPage, setCurrentPage] = useState("page1");
 
-  const handleRegisterClick = () => {
-    switch (currentPage) {
-      case "page1":
-        setCurrentPage("page2");
-        break;
-      case "page2":
-        setCurrentPage("page1");
-        break;
-      case "page3":
-        setCurrentPage("page2");
-        break;
-      case "page4":
-        setCurrentPage("page2");
-        break;
-      case "page5":
-        setCurrentPage("page2");
-        break;
-    }
-  };
-
   const renderPage = () => {
     switch (currentPage) {
       case "page1":
-        return <Page1 onRegisterClick={handleRegisterClick} />;
+        return <Page1 onButtonClick1={() => setCurrentPage("page2")} />;
       case "page2":
         return (
           <Page2
-            onBack={() => setCurrentPage("page1")}
-            onButtonClick1={() => setCurrentPage("page3")}
-            onButtonClick2={() => setCurrentPage("page4")}
+            onBack1={() => setCurrentPage("page1")}
+            onButtonClick2={() => setCurrentPage("page3")}
+            onButtonClick3={() => setCurrentPage("page4")}
           />
         );
       case "page3":
-        return <Page3 />;
+        return <Page3 onBack2={() => setCurrentPage("page2")} />;
       case "page4":
-        return <Page4 />;
+        return (
+          <Page4
+            onBack3={() => setCurrentPage("page2")}
+            onButtonClick4={() => setCurrentPage("page5")}
+          />
+        );
       case "page5":
-        return <Page5 />;
+        return <Page5 onBack4={() => setCurrentPage("page4")}/>;
       default:
         return null;
     }
