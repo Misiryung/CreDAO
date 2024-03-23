@@ -5,9 +5,15 @@ import CreateWalletButtons from "../button/createwalletbutton";
 
 interface Page2Props {
   onBack: () => void; // 定义onBack属性为函数类型，没有参数和返回值
+  onButtonClick1: () => void; // 定义onButtonClick1属性为函数类型，没有参数和返回值
+  onButtonClick2: () => void; // 定义onButtonClick2属性为函数类型，没有参数和返回值
 }
 
-const Page2: React.FC<Page2Props> = ({ onBack }) => {
+const Page2: React.FC<Page2Props> = ({
+  onBack,
+  onButtonClick1,
+  onButtonClick2,
+}) => {
   return (
     <Box
       sx={{
@@ -51,8 +57,8 @@ const Page2: React.FC<Page2Props> = ({ onBack }) => {
           gap: "20px",
         }}
       >
-        <ImportWalletButtons />
-        <CreateWalletButtons />
+        <ImportWalletButtons onButtonClick1={onButtonClick1} />
+        <CreateWalletButtons onButtonClick2={onButtonClick2} />
         <Typography
           variant="body1"
           style={{
