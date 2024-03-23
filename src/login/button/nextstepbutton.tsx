@@ -1,6 +1,5 @@
 import * as React from "react";
-import { Box, Typography, styled } from "@mui/material";
-import Button from "@mui/material/Button";
+import { Box, Typography, styled, Button } from "@mui/material";
 
 const NextstepButton = styled(Button)({
   fontSize: 16,
@@ -15,7 +14,15 @@ const NextstepButton = styled(Button)({
   },
 });
 
-export default function NextstepButtons() {
+interface NextstepButtonsProps {
+  onBack3: () => void;
+  onButtonClick4: () => void;
+}
+
+const NextstepButtons: React.FC<NextstepButtonsProps> = ({
+  onBack3,
+  onButtonClick4,
+}) => {
   return (
     <Box display="flex" flexDirection="row" alignItems="center" width="100%">
       <Typography
@@ -26,12 +33,20 @@ export default function NextstepButtons() {
           color: "#000",
           textAlign: "left",
         }}
+        onClick={onBack3}
       >
         返回
       </Typography>
-      <NextstepButton variant="contained" fullWidth disableRipple>
+      <NextstepButton
+        variant="contained"
+        fullWidth
+        disableRipple
+        onClick={onButtonClick4}
+      >
         下一步
       </NextstepButton>
     </Box>
   );
-}
+};
+
+export default NextstepButtons;
