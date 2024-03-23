@@ -35,7 +35,13 @@ const LoginHome: React.FC = () => {
       case "page1":
         return <Page1 onRegisterClick={handleRegisterClick} />;
       case "page2":
-        return <Page2 onBack={() => setCurrentPage("page1")} />;
+        return (
+          <Page2
+            onBack={() => setCurrentPage("page1")}
+            onButtonClick1={() => setCurrentPage("page3")}
+            onButtonClick2={() => setCurrentPage("page4")}
+          />
+        );
       case "page3":
         return <Page3 />;
       case "page4":
