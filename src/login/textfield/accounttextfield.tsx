@@ -6,14 +6,14 @@ const AccountTextField = styled(TextField)({
     color: "#000",
   },
   "& .MuiOutlinedInput-root": {
-    borderRadius: "8px", // 圆角为 8px
+    borderRadius: "8px",
     "& fieldset": {
       borderColor: "#000",
-      borderWidth: "1.2px", // 边框粗细为 1px
+      borderWidth: "1.2px",
     },
     "&.Mui-focused fieldset": {
       borderColor: "#000",
-      borderWidth: "1.6px", // 边框粗细为 1.5px
+      borderWidth: "1.6px",
     },
   },
 });
