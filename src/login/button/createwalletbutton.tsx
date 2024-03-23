@@ -1,6 +1,5 @@
 import * as React from "react";
-import { Paper, Typography, styled } from "@mui/material";
-import Button from "@mui/material/Button";
+import { Paper, Typography, styled, Button } from "@mui/material";
 
 const CreateWalletButton = styled(Button)({
   fontSize: 16,
@@ -16,11 +15,11 @@ const CreateWalletButton = styled(Button)({
 });
 
 interface CreateWalletButtonsProps {
-  onButtonClick2: () => void; // Define the prop for onRegisterClick function
+  onButtonClick3: () => void;
 }
 
 const CreateWalletButtons: React.FC<CreateWalletButtonsProps> = ({
-  onButtonClick2,
+  onButtonClick3,
 }) => {
   return (
     <Paper
@@ -51,7 +50,7 @@ const CreateWalletButtons: React.FC<CreateWalletButtonsProps> = ({
         variant="contained"
         fullWidth
         disableRipple
-        onClick={onButtonClick2}
+        onClick={onButtonClick3}
       >
         创建钱包
       </CreateWalletButton>
