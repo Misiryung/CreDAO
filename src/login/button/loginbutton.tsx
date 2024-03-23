@@ -1,6 +1,6 @@
 import * as React from "react";
-import { Box, Typography, styled } from "@mui/material";
-import Button from "@mui/material/Button";
+import { useNavigate } from "react-router-dom";
+import { Box, Typography, styled, Button } from "@mui/material";
 
 const LoginButton = styled(Button)({
   fontSize: 16,
@@ -34,13 +34,22 @@ const RegisterButton = styled(Button)({
 });
 
 interface LoginButtonsProps {
-  onRegisterClick: () => void; // Define the prop for onRegisterClick function
+  onButtonClick1: () => void;
 }
 
-const LoginButtons: React.FC<LoginButtonsProps> = ({ onRegisterClick }) => {
+const LoginButtons: React.FC<LoginButtonsProps> = ({ onButtonClick1 }) => {
+  const navigate = useNavigate();
+  const handleLogin = () => {
+    navigate("/首页");
+  };
   return (
     <Box display="flex" flexDirection="column" alignItems="center" width="100%">
-      <LoginButton variant="contained" fullWidth disableRipple>
+      <LoginButton
+        variant="contained"
+        fullWidth
+        disableRipple
+        onClick={handleLogin}
+      >
         登录
       </LoginButton>
 
@@ -58,7 +67,7 @@ const LoginButtons: React.FC<LoginButtonsProps> = ({ onRegisterClick }) => {
         variant="outlined"
         fullWidth
         disableRipple
-        onClick={onRegisterClick}
+        onClick={onButtonClick1}
       >
         注册
       </RegisterButton>
