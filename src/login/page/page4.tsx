@@ -1,8 +1,6 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
-import ImportPrivatekey from "../components/importprivatekey";
-import NextstepButtons from "../button/nextstepbutton";
-import CopyBox from "../components/copybox";
+import InputPrivatekey from "../components/inputprivatekey";
 
 interface Page4Props {
   onBack3: () => void;
@@ -67,23 +65,13 @@ const Page4: React.FC<Page4Props> = ({ onBack3, onButtonClick4 }) => {
       <Box
         sx={{
           width: "100%",
-          marginTop: "50px",
+          marginTop: "40px",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          gap: "10px",
         }}
       >
-        <ImportPrivatekey />
-        <CopyBox />
-      </Box>
-      <Box
-        sx={{
-          width: "100%",
-          marginTop: "80px",
-        }}
-      >
-        <NextstepButtons onButtonClick4={onButtonClick4} onBack3={onBack3} />
+        <InputPrivatekey onButtonClick4={onButtonClick4} onBack3={onBack3} />
       </Box>
     </Box>
   );
