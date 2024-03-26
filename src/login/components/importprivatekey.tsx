@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Box, styled, TextField, InputAdornment, Paper } from "@mui/material";
 import { VisibilityIcon, VisibilityOffIcon } from "../icons";
+import CompleteButtons from "../button/completebutton";
 
 const PrivatekeyTextField = styled(TextField)({
   "& label.Mui-focused": {
@@ -34,7 +35,11 @@ const PrivatekeyPaper = styled(Paper)({
   },
 });
 
-export default function ImportPrivatekey() {
+interface ImportPrivatekeyProps {
+  onBack2: () => void;
+}
+
+const ImportPrivatekey: React.FC<ImportPrivatekeyProps> = ({ onBack2 }) => {
   const [showPasswords, setShowPasswords] = useState([
     false,
     false,
@@ -57,62 +62,81 @@ export default function ImportPrivatekey() {
   };
 
   return (
-    <PrivatekeyPaper>
-      {[0, 1, 2, 3].map((row) => (
-        <Box
-          key={row}
-          display="flex"
-          justifyContent="space-between"
-          mb={row !== 3 ? 2 : 0}
-          alignItems="center"
-        >
-          {[0, 1, 2].map((col) => {
-            const index = row * 3 + col;
-            return (
-              <Box key={index} width="32%">
-                <PrivatekeyTextField
-                  id={`password-${index}`}
-                  type={showPasswords[index] ? "text" : "password"}
-                  fullWidth
-                  size="small"
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <Box
-                          component="button"
-                          aria-label="toggle password visibility"
-                          alignItems="center"
-                          onClick={() => handleClickShowPassword(index)}
-                          sx={{
-                            border: "none",
-                            background: "none",
-                            cursor: "pointer",
-                            padding: 0,
-                          }}
-                        >
-                          {showPasswords[index] ? (
-                            <VisibilityIcon
-                              width={20}
-                              height={20}
-                              fill="#000"
-                            />
-                          ) : (
-                            <VisibilityOffIcon
-                              width={20}
-                              height={20}
-                              fill="#000"
-                            />
-                          )}
-                        </Box>
-                      </InputAdornment>
-                    ),
-                  }}
-                />
-              </Box>
-            );
-          })}
-        </Box>
-      ))}
-    </PrivatekeyPaper>
+    <Box
+      sx={{
+        width: "100%",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
+    >
+      <PrivatekeyPaper>
+        {[0, 1, 2, 3].map((row) => (
+          <Box
+            key={row}
+            display="flex"
+            justifyContent="space-between"
+            mb={row !== 3 ? 2 : 0}
+            alignItems="center"
+          >
+            {[0, 1, 2].map((col) => {
+              const index = row * 3 + col;
+              return (
+                <Box key={index} width="32%">
+                  <PrivatekeyTextField
+                    id={`password-${index}`}
+                    type={showPasswords[index] ? "text" : "password"}
+                    fullWidth
+                    size="small"
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <Box
+                            component="button"
+                            aria-label="toggle password visibility"
+                            alignItems="center"
+                            onClick={() => handleClickShowPassword(index)}
+                            sx={{
+                              border: "none",
+                              background: "none",
+                              cursor: "pointer",
+                              padding: 0,
+                            }}
+                          >
+                            {showPasswords[index] ? (
+                              <VisibilityIcon
+                                width={20}
+                                height={20}
+                                fill="#000"
+                              />
+                            ) : (
+                              <VisibilityOffIcon
+                                width={20}
+                                height={20}
+                                fill="#000"
+                              />
+                            )}
+                          </Box>
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
+                </Box>
+              );
+            })}
+          </Box>
+        ))}
+      </PrivatekeyPaper>
+      <Box
+        sx={{
+          width: "100%",
+          marginTop: "80px",
+        }}
+      >
+        <CompleteButtons onBack2={onBack2} />
+      </Box>
+    </Box>
   );
-}
+};
+
+export default ImportPrivatekey;
