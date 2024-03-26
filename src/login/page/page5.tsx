@@ -1,7 +1,6 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
-import ImportPrivatekey from "../components/importprivatekey";
-import CreatedButtons from "../button/createdbutton";
+import VerifyPrivatekey from "../components/verifyprivatekey";
 
 interface Page5Props {
   onBack4: () => void;
@@ -65,22 +64,14 @@ const Page5: React.FC<Page5Props> = ({ onBack4 }) => {
       <Box
         sx={{
           width: "100%",
-          marginTop: "50px",
+          marginTop: "40px",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
           gap: "10px",
         }}
       >
-        <ImportPrivatekey />
-      </Box>
-      <Box
-        sx={{
-          width: "100%",
-          marginTop: "80px",
-        }}
-      >
-        <CreatedButtons onBack4={onBack4} />
+        <VerifyPrivatekey onBack4={onBack4} />
       </Box>
     </Box>
   );
