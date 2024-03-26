@@ -1,7 +1,6 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
 import ImportPrivatekey from "../components/importprivatekey";
-import CompleteButtons from "../button/completebutton";
 
 interface Page3Props {
   onBack2: () => void;
@@ -65,22 +64,14 @@ const Page3: React.FC<Page3Props> = ({ onBack2 }) => {
       <Box
         sx={{
           width: "100%",
-          marginTop: "50px",
+          marginTop: "40px",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
           gap: "10px",
         }}
       >
-        <ImportPrivatekey />
-      </Box>
-      <Box
-        sx={{
-          width: "100%",
-          marginTop: "80px",
-        }}
-      >
-        <CompleteButtons onBack2={onBack2} />
+        <ImportPrivatekey onBack2={onBack2} />
       </Box>
     </Box>
   );
