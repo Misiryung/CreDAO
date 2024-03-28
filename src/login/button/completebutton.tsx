@@ -17,13 +17,30 @@ const CompleteButton = styled(Button)({
 
 interface CompleteButtonsProps {
   onBack2: () => void;
+  importWallet: () => Promise<boolean>; // Modify importWallet to return a Promise<boolean>
 }
 
-const CompleteButtons: React.FC<CompleteButtonsProps> = ({ onBack2 }) => {
+const CompleteButtons: React.FC<CompleteButtonsProps> = ({
+  onBack2,
+  importWallet,
+}) => {
   const navigate = useNavigate();
-  const handleComplete = () => {
-    navigate("/首页");
+
+  const handleComplete = async () => {
+    try {
+      const importSuccess = await importWallet();
+      if (importSuccess) {
+        navigate("/首页");
+      } else {
+        // Handle import failure, if needed
+        console.log("导入钱包失败");
+      }
+    } catch (error) {
+      // Handle any errors during wallet import
+      console.error("导入钱包时出错:", error);
+    }
   };
+
   return (
     <Box display="flex" flexDirection="row" alignItems="center" width="100%">
       <Typography
