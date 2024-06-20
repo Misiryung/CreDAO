@@ -22,12 +22,8 @@ const openedMixin = (theme: Theme): CSSObject => ({
 });
 
 const closedMixin = (theme: Theme): CSSObject => ({
-  transition: theme.transitions.create("width", {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-  overflowX: "hidden",
   width: "80px",
+  overflowX: "hidden",
 });
 
 const DrawerHeader = styled("div")(({ theme }) => ({
@@ -73,6 +69,11 @@ const closedIconStyles = {
 const Drawer = styled(MuiDrawer, {
   shouldForwardProp: (prop) => prop !== "open",
 })(({ theme, open }) => ({
+  position: "absolute",
+  top: 0,
+  left: 0,
+  bottom: 0,
+  zIndex: 1200,
   width: drawerWidth,
   flexShrink: 0,
   whiteSpace: "nowrap",
@@ -104,7 +105,7 @@ interface MiniDrawerProps {
   setSelectedCategory: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const MiniDrawer: React.FC<MiniDrawerProps> = ({
+const SideBar: React.FC<MiniDrawerProps> = ({
   selectedCategory,
   setSelectedCategory,
 }) => {
@@ -120,53 +121,55 @@ const MiniDrawer: React.FC<MiniDrawerProps> = ({
   };
 
   return (
-    <Drawer variant="permanent" open={open}>
-      <DrawerHeader>
-        <IconButton onClick={open ? handleDrawerClose : handleDrawerOpen}>
-          <NavigationIcon fill="#000" width={24} height={24} />
-        </IconButton>
-      </DrawerHeader>
-      <List>
-        {categories.map((category) => (
-          <ListItem key={category.name} disablePadding>
-            <ListItemButton
-              disableRipple
-              sx={{
-                background:
-                  category.name === selectedCategory
-                    ? "#D9D9D9"
-                    : "transparent",
-                borderRadius: "10px",
-                ...(open ? openedButtonStyles : closedButtonStyles),
-              }}
-            >
-              <ListItemIcon
+    <div style={{ position: "relative" }}>
+      <Drawer variant="permanent" open={open}>
+        <DrawerHeader>
+          <IconButton onClick={open ? handleDrawerClose : handleDrawerOpen}>
+            <NavigationIcon fill="#000" width={24} height={24} />
+          </IconButton>
+        </DrawerHeader>
+        <List>
+          {categories.map((category) => (
+            <ListItem key={category.name} disablePadding>
+              <ListItemButton
+                disableRipple
                 sx={{
-                  ...(open ? openedIconStyles : closedIconStyles),
+                  background:
+                    category.name === selectedCategory
+                      ? "#D9D9D9"
+                      : "transparent",
+                  borderRadius: "10px",
+                  ...(open ? openedButtonStyles : closedButtonStyles),
                 }}
               >
-                {selectedCategory === category.name
-                  ? category.iconType1
-                  : category.iconType2}
-              </ListItemIcon>
-              <Typography
-                sx={{
-                  fontFamily:
-                    '"Your Custom Font", "Microsoft YaHei", sans-serif',
-                  fontSize: "14px",
-                  fontWeight: 500,
-                  color: "#000",
-                  ...(open ? { marginLeft: "0px" } : { marginTop: "5px" }),
-                }}
-              >
-                {category.name}
-              </Typography>
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-    </Drawer>
+                <ListItemIcon
+                  sx={{
+                    ...(open ? openedIconStyles : closedIconStyles),
+                  }}
+                >
+                  {selectedCategory === category.name
+                    ? category.iconType1
+                    : category.iconType2}
+                </ListItemIcon>
+                <Typography
+                  sx={{
+                    fontFamily:
+                      '"Your Custom Font", "Microsoft YaHei", sans-serif',
+                    fontSize: "14px",
+                    fontWeight: 500,
+                    color: "#000",
+                    ...(open ? { marginLeft: "0px" } : { marginTop: "5px" }),
+                  }}
+                >
+                  {category.name}
+                </Typography>
+              </ListItemButton>
+            </ListItem>
+          ))}
+        </List>
+      </Drawer>
+    </div>
   );
 };
 
-export default MiniDrawer;
+export default SideBar;
