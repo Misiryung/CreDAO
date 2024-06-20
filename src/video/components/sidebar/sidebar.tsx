@@ -7,19 +7,8 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import List from "@mui/material/List";
-import {
-  NavigationIcon,
-  HomeIcon,
-  HomeFilledIcon,
-  SubscriptionsIcon,
-  SubscriptionsFilledIcon,
-  CollectionsIcon,
-  CollectionsFilledIcon,
-  HistoryIcon,
-  HistoryFilledIcon,
-  NotificationsIcon,
-  NotificationsFilledIcon,
-} from "./icons";
+import { categories } from "./categories";
+import { NavigationIcon } from "./icons";
 
 const drawerWidth = 240;
 
@@ -77,40 +66,6 @@ const Drawer = styled(MuiDrawer, {
     },
   }),
 }));
-
-interface Category {
-  name: string;
-  iconType1: JSX.Element;
-  iconType2: JSX.Element;
-}
-
-const categories: Category[] = [
-  {
-    name: "首页",
-    iconType1: <HomeFilledIcon fill="#000" width={24} height={24} />,
-    iconType2: <HomeIcon fill="#000" width={24} height={24} />,
-  },
-  {
-    name: "关注",
-    iconType1: <SubscriptionsFilledIcon width={24} height={24} />,
-    iconType2: <SubscriptionsIcon width={24} height={24} />,
-  },
-  {
-    name: "收藏",
-    iconType1: <CollectionsFilledIcon fill="#000" width={24} height={24} />,
-    iconType2: <CollectionsIcon fill="#000" width={24} height={24} />,
-  },
-  {
-    name: "历史",
-    iconType1: <HistoryFilledIcon fill="#000" width={24} height={24} />,
-    iconType2: <HistoryIcon fill="#000" width={24} height={24} />,
-  },
-  {
-    name: "通知",
-    iconType1: <NotificationsFilledIcon fill="#000" width={24} height={24} />,
-    iconType2: <NotificationsIcon fill="#000" width={24} height={24} />,
-  },
-];
 
 interface MiniDrawerProps {
   selectedCategory: string;
