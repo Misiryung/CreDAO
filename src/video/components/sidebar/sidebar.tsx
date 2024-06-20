@@ -27,16 +27,48 @@ const closedMixin = (theme: Theme): CSSObject => ({
     duration: theme.transitions.duration.leavingScreen,
   }),
   overflowX: "hidden",
-  width: "70px",
+  width: "80px",
 });
 
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  width: "70px",
+  width: "80px",
   padding: "8px 0",
 }));
+
+const openedButtonStyles = {
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "flex-start",
+  px: 2.5,
+  py: 1.5,
+  marginLeft: "5px",
+  marginRight: "5px",
+};
+
+const closedButtonStyles = {
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center",
+  px: 2.5,
+  py: 2,
+  marginLeft: "10px",
+  marginRight: "10px",
+};
+
+const openedIconStyles = {
+  display: "flex",
+  justifyContent: "flex-start",
+  marginLeft: "3px",
+};
+
+const closedIconStyles = {
+  display: "flex",
+  justifyContent: "center",
+};
 
 const Drawer = styled(MuiDrawer, {
   shouldForwardProp: (prop) => prop !== "open",
@@ -96,34 +128,21 @@ const MiniDrawer: React.FC<MiniDrawerProps> = ({
       </DrawerHeader>
       <List>
         {categories.map((category) => (
-          <ListItem
-            key={category.name}
-            disablePadding
-            sx={{ display: "block", position: "relative" }}
-            onClick={() => setSelectedCategory(category.name)}
-          >
+          <ListItem key={category.name} disablePadding>
             <ListItemButton
               disableRipple
               sx={{
-                minHeight: 48,
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-                px: 2.5,
-                py: 2,
-                marginLeft: "3px",
-                marginRight: "3px",
                 background:
-                  category.name === selectedCategory ? "#D9D9D9" : undefined,
+                  category.name === selectedCategory
+                    ? "#D9D9D9"
+                    : "transparent",
                 borderRadius: "10px",
+                ...(open ? openedButtonStyles : closedButtonStyles),
               }}
             >
               <ListItemIcon
                 sx={{
-                  minWidth: 0,
-                  mb: open ? 1 : 0,
-                  justifyContent: "center",
+                  ...(open ? openedIconStyles : closedIconStyles),
                 }}
               >
                 {selectedCategory === category.name
@@ -137,6 +156,7 @@ const MiniDrawer: React.FC<MiniDrawerProps> = ({
                   fontSize: "14px",
                   fontWeight: 500,
                   color: "#000",
+                  ...(open ? { marginLeft: "0px" } : { marginTop: "5px" }),
                 }}
               >
                 {category.name}
@@ -145,21 +165,6 @@ const MiniDrawer: React.FC<MiniDrawerProps> = ({
           </ListItem>
         ))}
       </List>
-      <Typography
-        variant="body2"
-        className="drawer-footer"
-        sx={{
-          textAlign: "center",
-          color: "#7F7F7F",
-          fontFamily: '"Your Custom Font", "Microsoft YaHei", sans-serif',
-          fontSize: "14px",
-          fontWeight: 400,
-          marginTop: "auto",
-          padding: "16px",
-        }}
-      >
-        © CreDAO Users Version
-      </Typography>
     </Drawer>
   );
 };
