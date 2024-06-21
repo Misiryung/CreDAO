@@ -40,8 +40,8 @@ const openedButtonStyles = {
   justifyContent: "flex-start",
   px: 2.5,
   py: 1.5,
-  marginLeft: "5px",
-  marginRight: "5px",
+  marginLeft: "8px",
+  marginRight: "8px",
 };
 
 const closedButtonStyles = {
@@ -51,14 +51,14 @@ const closedButtonStyles = {
   justifyContent: "center",
   px: 2.5,
   py: 2,
-  marginLeft: "10px",
-  marginRight: "10px",
+  marginLeft: "5px",
+  marginRight: "5px",
 };
 
 const openedIconStyles = {
   display: "flex",
   justifyContent: "flex-start",
-  marginLeft: "3px",
+  marginLeft: "0px",
 };
 
 const closedIconStyles = {
