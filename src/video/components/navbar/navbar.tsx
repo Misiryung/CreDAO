@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import SearchBar from "../searchbar/searchbar";
 import WalletHome from "../../../wallet/components/home/home";
 import {
-  NavigationIcon,
   Logo,
   WalletIcon,
   CreatorIcon,
@@ -34,7 +33,7 @@ const Navbar: React.FC<NavbarProps> = () => {
         position: "sticky",
         background: "#FFF",
         top: 0,
-        height: "8vh",
+        height: "9vh",
       }}
     >
       <Stack direction="row" alignItems="center">
