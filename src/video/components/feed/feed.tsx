@@ -60,24 +60,14 @@ const Feed: React.FC = () => {
     >
       <Box
         sx={{
-          width: "200px",
-          height: "100vh",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-          overflowY: "hidden",
+          width: "80px",
+          height: "100%",
         }}
       >
         <Sidebar
           selectedCategory={selectedCategory}
           setSelectedCategory={setSelectedCategory}
         />
-        <Typography
-          variant="body2"
-          sx={{ textAlign: "center", color: "#7F7F7F" }}
-        >
-          © CreDAO Users Version
-        </Typography>
       </Box>
       <Box
         sx={{
