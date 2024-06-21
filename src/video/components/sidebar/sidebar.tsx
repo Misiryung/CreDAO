@@ -10,10 +10,11 @@ import List from "@mui/material/List";
 import { categories } from "./categories";
 import { NavigationIcon } from "./icons";
 
-const drawerWidth = 240;
+const openedWidth = 240;
+const closedWidth = 80;
 
 const openedMixin = (theme: Theme): CSSObject => ({
-  width: drawerWidth,
+  width: openedWidth,
   transition: theme.transitions.create("width", {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.enteringScreen,
@@ -22,7 +23,7 @@ const openedMixin = (theme: Theme): CSSObject => ({
 });
 
 const closedMixin = (theme: Theme): CSSObject => ({
-  width: "80px",
+  width: closedWidth,
   overflowX: "hidden",
 });
 
@@ -30,7 +31,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  width: "80px",
+  width: closedWidth,
   padding: "8px 0",
 }));
 
@@ -74,7 +75,7 @@ const Drawer = styled(MuiDrawer, {
   left: 0,
   bottom: 0,
   zIndex: 1200,
-  width: drawerWidth,
+  width: openedWidth,
   flexShrink: 0,
   whiteSpace: "nowrap",
   boxSizing: "border-box",
@@ -100,12 +101,12 @@ const Drawer = styled(MuiDrawer, {
   }),
 }));
 
-interface MiniDrawerProps {
+interface SideBarProps {
   selectedCategory: string;
   setSelectedCategory: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const SideBar: React.FC<MiniDrawerProps> = ({
+const SideBar: React.FC<SideBarProps> = ({
   selectedCategory,
   setSelectedCategory,
 }) => {
