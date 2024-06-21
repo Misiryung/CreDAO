@@ -14,12 +14,7 @@ const VideoList: React.FC<VideoListProps> = ({
   const slicedVideoList = maxCards ? videoList.slice(0, maxCards) : videoList;
 
   return (
-    <Stack
-      direction={direction || "row"}
-      flexWrap="wrap"
-      justifyContent="center"
-      marginTop="10px"
-    >
+    <Stack direction={direction || "row"} flexWrap="wrap" marginTop="10px">
       {slicedVideoList.map((video, index) => (
         <Box key={index}>{video.id.videoId && <VideoCard video={video} />}</Box>
       ))}
