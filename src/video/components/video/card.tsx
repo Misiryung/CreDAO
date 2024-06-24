@@ -41,7 +41,7 @@ const VideoCard: React.FC<{ video: VideoTypes }> = ({ video }) => {
         marginBottom: 5,
         display: "flex",
         flexDirection: "column",
-        borderRadius: "10px",
+        borderRadius: "20px",
       }}
     >
       <Link
@@ -52,7 +52,7 @@ const VideoCard: React.FC<{ video: VideoTypes }> = ({ video }) => {
           component="img"
           image={snippet?.thumbnails?.high?.url}
           alt={snippet?.title}
-          sx={{ width: 352, height: 198, borderRadius: "10px" }}
+          sx={{ width: 352, height: 198, borderRadius: "20px" }}
         />
       </Link>
 
