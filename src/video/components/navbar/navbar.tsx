@@ -33,7 +33,7 @@ const Navbar: React.FC<NavbarProps> = () => {
         position: "sticky",
         background: "#FFF",
         top: 0,
-        height: "9vh",
+        height: "8vh",
       }}
     >
       <Stack direction="row" alignItems="center">
