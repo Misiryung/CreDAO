@@ -46,8 +46,9 @@ a {
 }
 
 .react-player {
-  height: 77vh !important;
+  height: 100% !important;
   width: 100% !important;
+  border-radius: 10px !important;
 }
 
 .search-bar {
