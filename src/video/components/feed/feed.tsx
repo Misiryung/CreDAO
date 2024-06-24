@@ -74,15 +74,13 @@ const Feed: React.FC = () => {
           flex: 1,
           display: "flex",
           flexDirection: "column",
-          height: "100vh",
+          height: "100%",
         }}
       >
         <Navbar />
         <Box
           sx={{
             overflowY: "auto",
-            height: "100%",
-            p: 2,
           }}
         >
           <VideoList videoList={videos || []} maxCards={20} />
