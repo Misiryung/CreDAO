@@ -3,7 +3,7 @@ import { Box, CardMedia, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import DetailIcon from "./icons";
 import { VideoTypes } from "./types";
-import { fetchChannelInfo } from "../../api";
+import { fetchChannelInfo, fetchVideoInfo } from "../../api";
 
 const VideoCard: React.FC<{ video: VideoTypes }> = ({ video }) => {
   const { id, snippet } = video;
@@ -27,16 +27,23 @@ const VideoCard: React.FC<{ video: VideoTypes }> = ({ video }) => {
   }, [snippet?.channelId]);
 
   useEffect(() => {
-    if (snippet?.statistics?.viewCount !== undefined) {
-      setViewCount(snippet.statistics.viewCount);
-    }
-    setPublishedAt(snippet.publishedAt);
-  }, [id.videoId, snippet?.statistics?.viewCount, snippet.publishedAt]);
+    const fetchVideoDetails = async () => {
+      if (id.videoId) {
+        const videoInfo = await fetchVideoInfo(id.videoId);
+        if (videoInfo) {
+          const { publishedAt, statistics } = videoInfo.snippet;
+          setPublishedAt(publishedAt);
+          setViewCount(statistics?.viewCount);
+        }
+      }
+    };
+
+    fetchVideoDetails();
+  }, [video]);
 
   return (
     <Box
       sx={{
-        width: "40vw",
         marginRight: 3,
         marginBottom: 5,
         display: "flex",
