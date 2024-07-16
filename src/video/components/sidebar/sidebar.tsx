@@ -1,12 +1,6 @@
 import React from "react";
-import { styled, useTheme, Theme, CSSObject } from "@mui/material/styles";
-import { Typography } from "@mui/material";
+import { styled, IconButton, List, ListItem, ListItemButton, ListItemIcon, Typography, useTheme, Theme, CSSObject } from "@mui/material";
 import MuiDrawer from "@mui/material/Drawer";
-import IconButton from "@mui/material/IconButton";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import List from "@mui/material/List";
 import { categories } from "./categories";
 import { NavigationIcon } from "./icons";
 
