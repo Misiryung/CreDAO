@@ -1,17 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import ReactPlayer from "react-player";
-import { Typography, Box, Stack } from "@mui/material";
-import { fetchVideoInfo, fetchChannelInfo } from "../../api";
+import { Typography, Box, Divider } from "@mui/material";
 import Sidebar from "../sidebar/sidebar";
 import Navbar from "../navbar/navbar";
+import VideoList from "../video/list1";
+import { VideoTypes } from "../video/types";
+import { fetchVideoInfo, fetchChannelInfo, searchVideos } from "../../api";
 
 const VideoDetail: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>("New");
+  const [videos, setVideos] = useState<VideoTypes[] | null>(null);
   const [videoDetail, setVideoDetail] = useState(null);
   const [channelAvatar, setChannelAvatar] = useState<string>("");
   const [channelTitle, setChannelTitle] = useState<string>("");
-  const [subscriberCount, setSubscriberCount] = useState<number | undefined>(0);
+  const [subscriberCount, setSubscriberCount] = useState<number | undefined>(
+    0
+  );
   const { id } = useParams<{ id: string }>() ?? { id: "" };
 
   useEffect(() => {
@@ -32,6 +37,9 @@ const VideoDetail: React.FC = () => {
             setSubscriberCount(channelInfo.subscriberCount);
           }
         }
+
+        const relatedVideos = await searchVideos(videoDetailData?.snippet?.title || "");
+        setVideos(relatedVideos);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -78,7 +86,7 @@ const VideoDetail: React.FC = () => {
             flex: 1,
             display: "flex",
             flexDirection: "row",
-            alignItems: "center",
+            alignItems: "flex-start",
           }}
         >
           <Box
@@ -92,21 +100,25 @@ const VideoDetail: React.FC = () => {
           >
             <Box
               sx={{
-                width: "54vw",
-                height: "54vh",
+                width: "60vw",
+                height: "60vh",
                 borderRadius: "20px",
                 overflow: "hidden",
+                display: "flex",
+                alignItems: "flex-start",
               }}
             >
               <ReactPlayer
                 url={`https://www.youtube.com/watch?v=${id}`}
                 className="react-player"
                 controls
+                width="100%"
+                height="100%"
               />
             </Box>
             <Box
               sx={{
-                width: "54vw",
+                width: "60vw",
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "flex-start",
@@ -169,8 +181,13 @@ const VideoDetail: React.FC = () => {
               display: "flex",
               flexDirection: "column",
               alignItems: "flex-start",
+              maxHeight: "100vh",
+              overflowY: "auto",
             }}
-          ></Box>
+          >
+            <Divider sx={{ width: "100%" }} />
+            <VideoList videoList={videos || []} maxCards={20} />
+          </Box>
         </Box>
       </Box>
     </Box>
