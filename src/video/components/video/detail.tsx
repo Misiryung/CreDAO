@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import ReactPlayer from "react-player";
-import { Typography, Box, Divider } from "@mui/material";
+import { Typography, Box } from "@mui/material";
 import Sidebar from "../sidebar/sidebar";
 import Navbar from "../navbar/navbar";
 import VideoList from "../video/list1";
@@ -14,10 +14,13 @@ const VideoDetail: React.FC = () => {
   const [videoDetail, setVideoDetail] = useState(null);
   const [channelAvatar, setChannelAvatar] = useState<string>("");
   const [channelTitle, setChannelTitle] = useState<string>("");
-  const [subscriberCount, setSubscriberCount] = useState<number | undefined>(
-    0
-  );
+  const [subscriberCount, setSubscriberCount] = useState<number | undefined>(0);
   const { id } = useParams<{ id: string }>() ?? { id: "" };
+
+  const width1 = "80px";
+  const width2 = "60vw";
+  const height1 = "8vh";
+  const height2 = "60vh";
 
   useEffect(() => {
     const fetchData = async () => {
@@ -38,7 +41,9 @@ const VideoDetail: React.FC = () => {
           }
         }
 
-        const relatedVideos = await searchVideos(videoDetailData?.snippet?.title || "");
+        const relatedVideos = await searchVideos(
+          videoDetailData?.snippet?.title || ""
+        );
         setVideos(relatedVideos);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -64,7 +69,7 @@ const VideoDetail: React.FC = () => {
     >
       <Box
         sx={{
-          width: "80px",
+          width: width1,
           height: "100%",
         }}
       >
@@ -75,7 +80,8 @@ const VideoDetail: React.FC = () => {
       </Box>
       <Box
         sx={{
-          flex: 1,
+          width: `calc(100vw - ${width1})`,
+          height: "100%",
           display: "flex",
           flexDirection: "column",
         }}
@@ -83,110 +89,117 @@ const VideoDetail: React.FC = () => {
         <Navbar />
         <Box
           sx={{
-            flex: 1,
+            width: `calc(100% - ${10}px)`,
+            height: `calc(100vh - ${height1} - ${10}px)`,
+            marginRigth: "10px",
+            marginTop: "10px",
             display: "flex",
             flexDirection: "row",
-            alignItems: "flex-start",
           }}
         >
           <Box
             sx={{
-              flex: 1,
-              padding: "10px",
+              width: "100%",
+              height: "100%",
               display: "flex",
-              flexDirection: "column",
+              flexDirection: "row",
               alignItems: "flex-start",
             }}
           >
             <Box
               sx={{
-                width: "60vw",
-                height: "60vh",
-                borderRadius: "20px",
-                overflow: "hidden",
-                display: "flex",
-                alignItems: "flex-start",
-              }}
-            >
-              <ReactPlayer
-                url={`https://www.youtube.com/watch?v=${id}`}
-                className="react-player"
-                controls
-                width="100%"
-                height="100%"
-              />
-            </Box>
-            <Box
-              sx={{
-                width: "60vw",
+                width: width2,
+                height: "100%",
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "flex-start",
               }}
             >
-              <Typography
-                color="#000"
-                fontSize="22px"
-                fontWeight="bold"
-                marginTop="10px"
+              <Box
+                sx={{
+                  width: "100%",
+                  height: height2,
+                  borderRadius: "16px",
+                  overflow: "hidden",
+                  display: "flex",
+                  alignItems: "flex-start",
+                }}
               >
-                {title || "Loading..."}
-              </Typography>
-
+                <ReactPlayer
+                  url={`https://www.youtube.com/watch?v=${id}`}
+                  className="react-player"
+                  controls
+                />
+              </Box>
               <Box
                 sx={{
                   display: "flex",
-                  alignItems: "center",
+                  flexDirection: "column",
+                  alignItems: "flex-start",
                 }}
               >
-                <img
-                  src={channelAvatar}
-                  alt={channelTitle}
-                  width={50}
-                  height={50}
-                  style={{ borderRadius: "50%" }}
-                />
+                <Typography
+                  color="#000"
+                  fontSize="22px"
+                  fontWeight="bold"
+                  marginTop="10px"
+                >
+                  {title || "Loading..."}
+                </Typography>
+
                 <Box
                   sx={{
                     display: "flex",
-                    flexDirection: "column",
-                    marginLeft: "5px",
+                    alignItems: "center",
                   }}
                 >
-                  <Link to={`/channel/${channelId}`}>
+                  <img
+                    src={channelAvatar}
+                    alt={channelTitle}
+                    width={50}
+                    height={50}
+                    style={{ borderRadius: "50%" }}
+                  />
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      marginLeft: "5px",
+                    }}
+                  >
+                    <Link to={`/channel/${channelId}`}>
+                      <Typography
+                        fontSize="16px"
+                        fontWeight="bold"
+                        color="#000"
+                        sx={{ marginLeft: "10px" }}
+                      >
+                        {channelTitle}
+                      </Typography>
+                    </Link>
                     <Typography
-                      fontSize="16px"
-                      fontWeight="bold"
-                      color="#000"
+                      fontSize="14px"
+                      color="#7F7F7F"
                       sx={{ marginLeft: "10px" }}
                     >
-                      {channelTitle}
+                      {subscriberCount || "0"} 订阅者
                     </Typography>
-                  </Link>
-                  <Typography
-                    fontSize="14px"
-                    color="#7F7F7F"
-                    sx={{ marginLeft: "10px" }}
-                  >
-                    • {subscriberCount} 订阅者
-                  </Typography>
+                  </Box>
                 </Box>
               </Box>
             </Box>
-          </Box>
-          <Box
-            sx={{
-              flex: 1,
-              padding: "10px",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "flex-start",
-              maxHeight: "100vh",
-              overflowY: "auto",
-            }}
-          >
-            <Divider sx={{ width: "100%" }} />
-            <VideoList videoList={videos || []} maxCards={20} />
+            <Box
+              sx={{
+                width: `calc(100% - ${width2})`,
+                height: "100%",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-start",
+                overflowY: "auto",
+              }}
+            >
+              <VideoList videoList={videos || []} maxCards={20} />
+            </Box>
           </Box>
         </Box>
       </Box>
