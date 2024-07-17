@@ -41,14 +41,21 @@ const VideoCard: React.FC<{ video: VideoTypes }> = ({ video }) => {
     fetchVideoDetails();
   }, [video]);
 
+  const width1 = "12vw";
+  const width2 = "60vw";
+  const height1 = "12vh";
+  const height2 = "60vh";
+
   return (
     <Box
       sx={{
-        marginRight: 3,
-        marginBottom: 5,
+        width: "100%",
+        height: "100%",
+        marginLeft: "20px",
+        marginRight: "10px",
+        marginBottom: "10px",
         display: "flex",
         flexDirection: "row",
-        borderRadius: "20px",
       }}
     >
       <Link
@@ -59,31 +66,34 @@ const VideoCard: React.FC<{ video: VideoTypes }> = ({ video }) => {
           component="img"
           image={snippet?.thumbnails?.high?.url}
           alt={snippet?.title}
-          sx={{ width: "160px", height: "90px", borderRadius: "10px" }}
+          sx={{
+            width: width1,
+            height: height1,
+            borderRadius: "10px",
+          }}
         />
       </Link>
 
       <Box
         sx={{
-          height: "90px",
+          width: `calc(100% - ${100}px)`,
+          height: height1,
           marginLeft: "10px",
           display: "flex",
           flexDirection: "column",
           alignItems: "flex-start",
-          width: "calc(100% - 60px)",
         }}
       >
         <Typography
           sx={{
-            lineHeight: "18px",
-            overflow: "hidden",
-            textOverflow: "ellipsis",
-            display: "-webkit-box",
-            WebkitBoxOrient: "vertical",
-            WebkitLineClamp: 2,
-            variant: "subtitle1",
+            lineHeight: "16px",
             fontSize: "16px",
             color: "#000",
+            display: "-webkit-box",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            WebkitBoxOrient: "vertical",
+            WebkitLineClamp: 2,
           }}
         >
           <Link to={id?.videoId ? `/video/${id.videoId}` : "/"}>
@@ -92,14 +102,28 @@ const VideoCard: React.FC<{ video: VideoTypes }> = ({ video }) => {
         </Typography>
 
         <Typography
-          sx={{ fontSize: "14px", fill: "#7F7F7F", marginTop: "5px" }}
+          sx={{
+            fontSize: "14px",
+            fill: "#7F7F7F",
+            marginTop: "5px",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            whiteSpace: "nowrap",
+          }}
         >
           {snippet?.channelTitle}
         </Typography>
 
-        <Typography sx={{ fontSize: "14px", fill: "#7F7F7F" }}>
-          {viewCount !== undefined ? viewCount : "Loading..."}次观看 •{" "}
-          {publishedAt}
+        <Typography
+          sx={{
+            fontSize: "14px",
+            fill: "#7F7F7F",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            whiteSpace: "nowrap",
+          }}
+        >
+          {viewCount !== undefined ? viewCount : "0"}次观看 • {publishedAt}
         </Typography>
       </Box>
 
