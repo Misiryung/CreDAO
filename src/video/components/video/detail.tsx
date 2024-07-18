@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Box } from "@mui/material";
+import { useParams } from "react-router-dom";
 import ReactPlayer from "react-player";
-import { Typography, Box } from "@mui/material";
 import Sidebar from "../sidebar/sidebar";
 import Navbar from "../navbar/navbar";
 import VideoList from "../video/list1";
@@ -11,10 +11,13 @@ import { fetchVideoInfo, fetchChannelInfo, searchVideos } from "../../api";
 const VideoDetail: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>("New");
   const [videos, setVideos] = useState<VideoTypes[] | null>(null);
-  const [videoDetail, setVideoDetail] = useState(null);
+  const [videoDetail, setVideoDetail] = useState<any>(null);
   const [channelAvatar, setChannelAvatar] = useState<string>("");
   const [channelTitle, setChannelTitle] = useState<string>("");
   const [subscriberCount, setSubscriberCount] = useState<number | undefined>(0);
+  const [popupContent, setPopupContent] = useState<string>("播放中...");
+  const [showPopup, setShowPopup] = useState<boolean>(true);
+
   const { id } = useParams<{ id: string }>() ?? { id: "" };
 
   const width1 = "80px";
@@ -53,9 +56,16 @@ const VideoDetail: React.FC = () => {
     fetchData();
   }, [id]);
 
-  const { snippet } = videoDetail || {
-    snippet: { title: "", channelId: "", channelTitle: "" },
+  const handleProgress = ({ playedSeconds }: { playedSeconds: number }) => {
+    if (playedSeconds < 10) {
+      const remaining = Math.ceil(10 - playedSeconds);
+      setPopupContent(`再观看 ${remaining} 秒，即可获得奖励`);
+    } else if (playedSeconds >= 10) {
+      setPopupContent("您已获得奖励");
+    }
   };
+
+  const { snippet = { title: "", channelId: "", channelTitle: "" } } = videoDetail || {};
   const { title, channelId } = snippet;
 
   return (
@@ -91,7 +101,7 @@ const VideoDetail: React.FC = () => {
           sx={{
             width: `calc(100% - ${10}px)`,
             height: `calc(100vh - ${height1} - ${10}px)`,
-            marginRigth: "10px",
+            marginRight: "10px",
             marginTop: "10px",
             display: "flex",
             flexDirection: "row",
@@ -123,69 +133,15 @@ const VideoDetail: React.FC = () => {
                   overflow: "hidden",
                   display: "flex",
                   alignItems: "flex-start",
+                  position: "relative",
                 }}
               >
                 <ReactPlayer
                   url={`https://www.youtube.com/watch?v=${id}`}
                   className="react-player"
                   controls
+                  onProgress={handleProgress}
                 />
-              </Box>
-              <Box
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "flex-start",
-                }}
-              >
-                <Typography
-                  color="#000"
-                  fontSize="22px"
-                  fontWeight="bold"
-                  marginTop="10px"
-                >
-                  {title || "Loading..."}
-                </Typography>
-
-                <Box
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                  }}
-                >
-                  <img
-                    src={channelAvatar}
-                    alt={channelTitle}
-                    width={50}
-                    height={50}
-                    style={{ borderRadius: "50%" }}
-                  />
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "column",
-                      marginLeft: "5px",
-                    }}
-                  >
-                    <Link to={`/channel/${channelId}`}>
-                      <Typography
-                        fontSize="16px"
-                        fontWeight="bold"
-                        color="#000"
-                        sx={{ marginLeft: "10px" }}
-                      >
-                        {channelTitle}
-                      </Typography>
-                    </Link>
-                    <Typography
-                      fontSize="14px"
-                      color="#7F7F7F"
-                      sx={{ marginLeft: "10px" }}
-                    >
-                      {subscriberCount || "0"} 订阅者
-                    </Typography>
-                  </Box>
-                </Box>
               </Box>
             </Box>
             <Box
@@ -203,6 +159,26 @@ const VideoDetail: React.FC = () => {
           </Box>
         </Box>
       </Box>
+      {showPopup && (
+        <Box
+          sx={{
+            position: "fixed",
+            height: "2vh",
+            top: "2vh",
+            right: "15vw",
+            backgroundColor: "rgba(0, 0, 0, 0.75)",
+            color: "#fff",
+            padding: "10px",
+            borderRadius: "8px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            textAlign: "center",
+          }}
+        >
+          {popupContent}
+        </Box>
+      )}
     </Box>
   );
 };
