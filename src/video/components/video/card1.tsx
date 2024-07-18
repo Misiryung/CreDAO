@@ -42,20 +42,20 @@ const VideoCard: React.FC<{ video: VideoTypes }> = ({ video }) => {
   }, [video]);
 
   const width1 = "12vw";
-  const width2 = "60vw";
   const height1 = "12vh";
-  const height2 = "60vh";
 
   return (
     <Box
       sx={{
-        width: "100%",
+        width: `calc(100% - ${30}px)`,
         height: "100%",
         marginLeft: "20px",
         marginRight: "10px",
         marginBottom: "10px",
         display: "flex",
         flexDirection: "row",
+        alignItems: "flex-start",
+        overflow: "hidden",
       }}
     >
       <Link
@@ -76,12 +76,12 @@ const VideoCard: React.FC<{ video: VideoTypes }> = ({ video }) => {
 
       <Box
         sx={{
-          width: `calc(100% - ${100}px)`,
+          flex: 1,
           height: height1,
           marginLeft: "10px",
           display: "flex",
           flexDirection: "column",
-          alignItems: "flex-start",
+          justifyContent: "space-between",
         }}
       >
         <Typography
@@ -104,7 +104,7 @@ const VideoCard: React.FC<{ video: VideoTypes }> = ({ video }) => {
         <Typography
           sx={{
             fontSize: "14px",
-            fill: "#7F7F7F",
+            color: "#7F7F7F",
             marginTop: "5px",
             overflow: "hidden",
             textOverflow: "ellipsis",
@@ -117,7 +117,7 @@ const VideoCard: React.FC<{ video: VideoTypes }> = ({ video }) => {
         <Typography
           sx={{
             fontSize: "14px",
-            fill: "#7F7F7F",
+            color: "#7F7F7F",
             overflow: "hidden",
             textOverflow: "ellipsis",
             whiteSpace: "nowrap",
