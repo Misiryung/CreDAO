@@ -80,6 +80,8 @@ const Feed: React.FC = () => {
         <Navbar />
         <Box
           sx={{
+            width: `calc(100% - ${20}px)`,
+            marginRight: "20px",
             overflowY: "auto",
           }}
         >
