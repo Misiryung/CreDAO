@@ -41,15 +41,17 @@ const VideoCard: React.FC<{ video: VideoTypes }> = ({ video }) => {
     fetchVideoDetails();
   }, [video]);
 
+  const width1 = "30vw";
+  const height1 = "28vh";
+
   return (
     <Box
       sx={{
-        width: 352,
-        marginRight: 3,
-        marginBottom: 5,
+        width: width1,
+        marginBottom: "5vh",
         display: "flex",
         flexDirection: "column",
-        borderRadius: "20px",
+        borderRadius: "16px",
       }}
     >
       <Link
@@ -60,11 +62,11 @@ const VideoCard: React.FC<{ video: VideoTypes }> = ({ video }) => {
           component="img"
           image={snippet?.thumbnails?.high?.url}
           alt={snippet?.title}
-          sx={{ width: 352, height: 198, borderRadius: "20px" }}
+          sx={{ width: width1, height: height1, borderRadius: "20px" }}
         />
       </Link>
 
-      <Box sx={{ width: 352, display: "flex" }}>
+      <Box sx={{ width: width1, display: "flex" }}>
         <Box sx={{ marginTop: "10px", marginRight: "10px" }}>
           <img
             src={channelAvatar}
@@ -101,8 +103,7 @@ const VideoCard: React.FC<{ video: VideoTypes }> = ({ video }) => {
           </Typography>
 
           <Typography sx={{ fontSize: "14px", fill: "#7F7F7F" }}>
-            {viewCount !== undefined ? viewCount : "0"}次观看 •{" "}
-            {publishedAt}
+            {viewCount !== undefined ? viewCount : "0"}次观看 • {publishedAt}
           </Typography>
         </Box>
 
