@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Box } from "@mui/material";
-import { useParams } from "react-router-dom";
+import { Box, Typography } from "@mui/material";
+import { Link, useParams } from "react-router-dom";
 import ReactPlayer from "react-player";
 import Sidebar from "../sidebar/sidebar";
 import Navbar from "../navbar/navbar";
@@ -65,7 +65,8 @@ const VideoDetail: React.FC = () => {
     }
   };
 
-  const { snippet = { title: "", channelId: "", channelTitle: "" } } = videoDetail || {};
+  const { snippet = { title: "", channelId: "", channelTitle: "" } } =
+    videoDetail || {};
   const { title, channelId } = snippet;
 
   return (
@@ -142,6 +143,63 @@ const VideoDetail: React.FC = () => {
                   controls
                   onProgress={handleProgress}
                 />
+              </Box>
+              <Box
+                sx={{
+                  width: "100%",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "flex-start",
+                }}
+              >
+                <Typography
+                  color="#000"
+                  fontSize="22px"
+                  fontWeight="bold"
+                  marginTop="10px"
+                >
+                  {title || "Loading..."}
+                </Typography>
+
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                  }}
+                >
+                  <img
+                    src={channelAvatar}
+                    alt={channelTitle}
+                    width={50}
+                    height={50}
+                    style={{ borderRadius: "50%" }}
+                  />
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      marginLeft: "5px",
+                    }}
+                  >
+                    <Link to={`/channel/${channelId}`}>
+                      <Typography
+                        fontSize="16px"
+                        fontWeight="bold"
+                        color="#000"
+                        sx={{ marginLeft: "10px" }}
+                      >
+                        {channelTitle}
+                      </Typography>
+                    </Link>
+                    <Typography
+                      fontSize="14px"
+                      color="#7F7F7F"
+                      sx={{ marginLeft: "10px" }}
+                    >
+                      {subscriberCount || "0"} 订阅者
+                    </Typography>
+                  </Box>
+                </Box>
               </Box>
             </Box>
             <Box
