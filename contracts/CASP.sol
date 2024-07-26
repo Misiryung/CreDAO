@@ -11,7 +11,6 @@ contract CASP {
     mapping(address => mapping(address => uint256)) public allowance;
 
     address[] public allAccounts;
-
     address public owner;
 
     event Transfer(address indexed from, address indexed to, uint256 value);
@@ -23,7 +22,7 @@ contract CASP {
     }
 
     constructor() {
-        owner = 0x27F66C1DAEB33B6a1670c221938B12D579372a9C;
+        owner = 0x5B38Da6a701c568545dCfcB03FcB875f56beddC4;
         balanceOf[owner] = totalSupply;
         allAccounts.push(owner);
     }
@@ -43,11 +42,16 @@ contract CASP {
         return true;
     }
 
+    function approve(address spender, uint256 value) external returns (bool) {
+        allowance[msg.sender][spender] = value;
+        emit Approval(msg.sender, spender, value);
+        return true;
+    }
+
     function transferFrom(address from, address to, uint256 value) external returns (bool) {
-        require(from != address(0), "Invalid sender address");
-        require(to != address(0), "Invalid recipient address");
-        require(value <= allowance[from][msg.sender], "Insufficient allowance");
-        require(value <= balanceOf[from], "Insufficient balance");
+        require(to != address(0), "Invalid address");
+        require(balanceOf[from] >= value, "Insufficient balance");
+        require(allowance[from][msg.sender] >= value, "Allowance exceeded");
 
         balanceOf[from] -= value;
         balanceOf[to] += value;
@@ -61,13 +65,6 @@ contract CASP {
         return true;
     }
 
-    function approve(address spender, uint256 value) external returns (bool) {
-        allowance[msg.sender][spender] = value;
-        emit Approval(msg.sender, spender, value);
-        return true;
-    }
-
-    // 仅合约所有者可以调用的铸造函数
     function mint(uint256 amount) external onlyOwner {
         totalSupply += amount;
         balanceOf[owner] += amount;
@@ -75,7 +72,6 @@ contract CASP {
         emit Transfer(address(0), owner, amount);
     }
 
-    // 仅合约所有者（Genesis 文件中预置的地址）可以调用的销毁函数
     function burn(uint256 amount) external onlyOwner {
         require(balanceOf[owner] >= amount, "Insufficient balance");
 
@@ -85,7 +81,6 @@ contract CASP {
         emit Transfer(owner, address(0), amount);
     }
 
-    // 获取所有有余额的账户地址和对应余额
     function getAccountsWithBalance() external view returns (address[] memory, uint256[] memory) {
         uint256 count = allAccounts.length;
         
