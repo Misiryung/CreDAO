@@ -2,26 +2,37 @@
 pragma solidity ^0.8.0;
 
 interface CASP {
+    function totalSupply() external view returns (uint256);
+    function balanceOf(address account) external view returns (uint256);
+    function transfer(address recipient, uint256 amount) external returns (bool);
     function transferFrom(address sender, address recipient, uint256 amount) external returns (bool);
-    function allowance(address owner, address spender) external view returns (uint256);
+    function approve(address spender, uint256 amount) external returns (bool);
+
+    event Transfer(address indexed from, address indexed to, uint256 value);
+    event Approval(address indexed owner, address indexed spender, uint256 value);
 }
 
 contract VEP {
-    CASP public token;
+    CASP public ZHENGold;
 
-    constructor(address tokenAddress) {
-        token = CASP(tokenAddress);
+    constructor(address CASPAddress) {
+        ZHENGold = CASP(CASPAddress);
     }
 
-    function distribute(address from, address tou, address toc, uint256 aet, uint256 ucr) external {
+    function adpay(
+        address creator,
+        address user,
+        uint256 ucr,
+        uint256 cpv
+    ) external {
         require(ucr >= 0 && ucr <= 100, "UCR should be between 0 and 100");
 
-        uint256 User = aet * ucr / 100;
-        uint256 Creator = aet * (100 - ucr) / 100;
+        uint256 userShare = cpv * ucr / 100;
+        uint256 creatorShare = cpv * (100 - ucr) / 100;
 
-        require(token.allowance(from, address(this)) >= aet, "Insufficient allowance");
-        
-        require(token.transferFrom(from, tou, User), "Transfer to first address failed");
-        require(token.transferFrom(from, toc, Creator), "Transfer to second address failed");
+        require(ZHENGold.balanceOf(msg.sender) >= cpv, "Insufficient balance");
+
+        require(ZHENGold.transferFrom(msg.sender, user, userShare), "Transfer to user failed");
+        require(ZHENGold.transferFrom(msg.sender, creator, creatorShare), "Transfer to creator failed");
     }
 }
