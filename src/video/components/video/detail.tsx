@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Box, Typography } from "@mui/material";
 import { Link, useParams } from "react-router-dom";
 import ReactPlayer from "react-player";
-import Sidebar from "../sidebar/sidebar";
 import Navbar from "../navbar/navbar";
 import VideoList from "../video/list1";
 import { VideoTypes } from "../video/types";
@@ -20,10 +19,9 @@ const VideoDetail: React.FC = () => {
 
   const { id } = useParams<{ id: string }>() ?? { id: "" };
 
-  const width1 = "80px";
-  const width2 = "60vw";
+  const width1 = "64vw";
   const height1 = "8vh";
-  const height2 = "60vh";
+  const height2 = "64vh";
 
   useEffect(() => {
     const fetchData = async () => {
@@ -75,145 +73,126 @@ const VideoDetail: React.FC = () => {
         width: "100%",
         height: "100%",
         display: "flex",
-        flexDirection: "row",
+        flexDirection: "column",
       }}
     >
+      <Navbar />
       <Box
         sx={{
-          width: width1,
-          height: "100%",
-        }}
-      >
-        <Sidebar
-          selectedCategory={selectedCategory}
-          setSelectedCategory={setSelectedCategory}
-        />
-      </Box>
-      <Box
-        sx={{
-          width: `calc(100vw - ${width1})`,
-          height: "100%",
+          width: `calc(100% - ${30}px)`,
+          height: `calc(100vh - ${height1} - ${10}px)`,
+          marginTop: "10px",
           display: "flex",
-          flexDirection: "column",
+          flexDirection: "row",
+          paddingLeft: "20px",
+          paddingRight: "10px",
         }}
       >
-        <Navbar />
         <Box
           sx={{
-            width: `calc(100% - ${10}px)`,
-            height: `calc(100vh - ${height1} - ${10}px)`,
-            marginRight: "10px",
-            marginTop: "10px",
+            width: "100%",
+            height: "100%",
             display: "flex",
             flexDirection: "row",
+            alignItems: "flex-start",
           }}
         >
           <Box
             sx={{
-              width: "100%",
+              width: width1,
               height: "100%",
               display: "flex",
-              flexDirection: "row",
+              flexDirection: "column",
               alignItems: "flex-start",
             }}
           >
             <Box
               sx={{
-                width: width2,
-                height: "100%",
+                width: "100%",
+                height: height2,
+                borderRadius: "16px",
+                overflow: "hidden",
                 display: "flex",
-                flexDirection: "column",
                 alignItems: "flex-start",
+                position: "relative",
               }}
             >
-              <Box
-                sx={{
-                  width: "100%",
-                  height: height2,
-                  borderRadius: "16px",
-                  overflow: "hidden",
-                  display: "flex",
-                  alignItems: "flex-start",
-                  position: "relative",
-                }}
-              >
-                <ReactPlayer
-                  url={`https://www.youtube.com/watch?v=${id}`}
-                  className="react-player"
-                  controls
-                  onProgress={handleProgress}
-                />
-              </Box>
-              <Box
-                sx={{
-                  width: "100%",
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "flex-start",
-                }}
-              >
-                <Typography
-                  color="#000"
-                  fontSize="22px"
-                  fontWeight="bold"
-                  marginTop="10px"
-                >
-                  {title || "Loading..."}
-                </Typography>
-
-                <Box
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                  }}
-                >
-                  <img
-                    src={channelAvatar}
-                    alt={channelTitle}
-                    width={50}
-                    height={50}
-                    style={{ borderRadius: "50%" }}
-                  />
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "column",
-                      marginLeft: "5px",
-                    }}
-                  >
-                    <Link to={`/channel/${channelId}`}>
-                      <Typography
-                        fontSize="16px"
-                        fontWeight="bold"
-                        color="#000"
-                        sx={{ marginLeft: "10px" }}
-                      >
-                        {channelTitle}
-                      </Typography>
-                    </Link>
-                    <Typography
-                      fontSize="14px"
-                      color="#7F7F7F"
-                      sx={{ marginLeft: "10px" }}
-                    >
-                      {subscriberCount || "0"} 订阅者
-                    </Typography>
-                  </Box>
-                </Box>
-              </Box>
+              <ReactPlayer
+                url={`https://www.youtube.com/watch?v=${id}`}
+                className="react-player"
+                controls
+                onProgress={handleProgress}
+              />
             </Box>
             <Box
               sx={{
-                width: `calc(100% - ${width2})`,
-                height: "100%",
+                width: "100%",
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "flex-start",
-                overflowY: "auto",
               }}
             >
-              <VideoList videoList={videos || []} maxCards={20} />
+              <Typography
+                color="#000"
+                fontSize="22px"
+                fontWeight="bold"
+                marginTop="10px"
+              >
+                {title || "Loading..."}
+              </Typography>
+
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                }}
+              >
+                <img
+                  src={channelAvatar}
+                  alt={channelTitle}
+                  width={50}
+                  height={50}
+                  style={{ borderRadius: "50%" }}
+                />
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    marginLeft: "5px",
+                  }}
+                >
+                  <Link to={`/channel/${channelId}`}>
+                    <Typography
+                      fontSize="16px"
+                      fontWeight="bold"
+                      color="#000"
+                      sx={{ marginLeft: "10px" }}
+                    >
+                      {channelTitle}
+                    </Typography>
+                  </Link>
+                  <Typography
+                    fontSize="14px"
+                    color="#7F7F7F"
+                    sx={{ marginLeft: "10px" }}
+                  >
+                    {subscriberCount || "0"} 订阅者
+                  </Typography>
+                </Box>
+              </Box>
             </Box>
+          </Box>
+          <Box
+            sx={{
+              width: `calc(100% - ${width1})`,
+              height: "100%",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "flex-start",
+              overflowY: "auto",
+            }}
+          >
+            <VideoList videoList={videos || []} maxCards={20} />
           </Box>
         </Box>
       </Box>
@@ -221,17 +200,19 @@ const VideoDetail: React.FC = () => {
         <Box
           sx={{
             position: "fixed",
-            height: "2vh",
+            height: "4vh",
             top: "2vh",
-            right: "15vw",
+            left: "69vw",
             backgroundColor: "rgba(0, 0, 0, 0.75)",
             color: "#fff",
-            padding: "10px",
             borderRadius: "8px",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
             textAlign: "center",
+            fontSize: "14px",
+            paddingLeft: "1vw",
+            paddingRight: "1vw",
           }}
         >
           {popupContent}
