@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Stack, IconButton, Box } from "@mui/material";
 import { Link } from "react-router-dom";
 import SearchBar from "../searchbar/searchbar";
+import { NavigationIcon } from "./icons";
 import WalletHome from "../../../wallet/components/home/home";
 import {
   Logo,
@@ -36,7 +37,19 @@ const Navbar: React.FC<NavbarProps> = () => {
         height: "8vh",
       }}
     >
-      <Stack direction="row" alignItems="center">
+      <Stack direction="row" alignItems="center" width="20vw">
+        <Box
+          sx={{
+            width: "6vw",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <IconButton>
+            <NavigationIcon fill="#000" width={24} height={24} />
+          </IconButton>
+        </Box>
         <Link
           to="/"
           style={{
@@ -45,13 +58,13 @@ const Navbar: React.FC<NavbarProps> = () => {
             textDecoration: "none",
           }}
         >
-          <Logo width={24} height={24} />
+          <Logo width={28} height={28} />
           <span
             style={{
               fontWeight: "bold",
-              fontSize: "20px",
+              fontSize: "22px",
               color: "#2196F3",
-              marginLeft: "5px",
+              marginLeft: "8px",
             }}
           >
             CreDAO
