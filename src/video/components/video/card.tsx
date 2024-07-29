@@ -42,7 +42,7 @@ const VideoCard: React.FC<{ video: VideoTypes }> = ({ video }) => {
   }, [video]);
 
   const width1 = "30vw";
-  const height1 = "28vh";
+  const height1 = "30vh";
 
   return (
     <Box
