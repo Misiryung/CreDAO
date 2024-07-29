@@ -1,99 +1,12 @@
 import React from "react";
-import { styled, IconButton, List, ListItem, ListItemButton, ListItemIcon, Typography, useTheme, Theme, CSSObject } from "@mui/material";
-import MuiDrawer from "@mui/material/Drawer";
+import {
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  Typography,
+} from "@mui/material";
 import { categories } from "./categories";
-import { NavigationIcon } from "./icons";
-
-const openedWidth = 240;
-const closedWidth = 80;
-
-const openedMixin = (theme: Theme): CSSObject => ({
-  width: openedWidth,
-  transition: theme.transitions.create("width", {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.enteringScreen,
-  }),
-  overflowX: "hidden",
-});
-
-const closedMixin = (theme: Theme): CSSObject => ({
-  width: closedWidth,
-  overflowX: "hidden",
-});
-
-const DrawerHeader = styled("div")(({ theme }) => ({
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  width: closedWidth,
-  padding: "8px 0",
-}));
-
-const openedButtonStyles = {
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "flex-start",
-  px: 2.5,
-  py: 1.5,
-  marginLeft: "8px",
-  marginRight: "8px",
-};
-
-const closedButtonStyles = {
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  justifyContent: "center",
-  px: 2.5,
-  py: 2,
-  marginLeft: "5px",
-  marginRight: "5px",
-};
-
-const openedIconStyles = {
-  display: "flex",
-  justifyContent: "flex-start",
-  marginLeft: "0px",
-};
-
-const closedIconStyles = {
-  display: "flex",
-  justifyContent: "center",
-};
-
-const Drawer = styled(MuiDrawer, {
-  shouldForwardProp: (prop) => prop !== "open",
-})(({ theme, open }) => ({
-  position: "absolute",
-  top: 0,
-  left: 0,
-  bottom: 0,
-  zIndex: 1200,
-  width: openedWidth,
-  flexShrink: 0,
-  whiteSpace: "nowrap",
-  boxSizing: "border-box",
-  ...(open && {
-    ...openedMixin(theme),
-    "& .MuiDrawer-paper": {
-      ...openedMixin(theme),
-      border: "none",
-    },
-    "& .drawer-footer": {
-      display: "block",
-    },
-  }),
-  ...(!open && {
-    ...closedMixin(theme),
-    "& .MuiDrawer-paper": {
-      ...closedMixin(theme),
-      border: "none",
-    },
-    "& .drawer-footer": {
-      display: "none",
-    },
-  }),
-}));
 
 interface SideBarProps {
   selectedCategory: string;
@@ -104,66 +17,62 @@ const SideBar: React.FC<SideBarProps> = ({
   selectedCategory,
   setSelectedCategory,
 }) => {
-  const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
-
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
-
   return (
-    <div style={{ position: "relative" }}>
-      <Drawer variant="permanent" open={open}>
-        <DrawerHeader>
-          <IconButton onClick={open ? handleDrawerClose : handleDrawerOpen}>
-            <NavigationIcon fill="#000" width={24} height={24} />
-          </IconButton>
-        </DrawerHeader>
-        <List>
-          {categories.map((category) => (
-            <ListItem key={category.name} disablePadding>
-              <ListItemButton
-                disableRipple
+    <List
+      sx={{
+        width: "6vw",
+        height: "92vh",
+        position: "fixed",
+        overflowY: "auto",
+      }}
+    >
+      {categories.map((category) => {
+        const isSelected = category.name === selectedCategory;
+
+        return (
+          <ListItem key={category.name} disablePadding>
+            <ListItemButton
+              disableRipple
+              onClick={() => setSelectedCategory(category.name)}
+              sx={{
+                borderRadius: "10px",
+                display: "flex",
+                alignItems: "center",
+                flexDirection: "column",
+                px: 2,
+                py: 2,
+                mx: "5px",
+                "&:hover": {
+                  background: "#f0f0f0",
+                },
+              }}
+            >
+              <ListItemIcon
                 sx={{
-                  background:
-                    category.name === selectedCategory
-                      ? "#D9D9D9"
-                      : "transparent",
-                  borderRadius: "10px",
-                  ...(open ? openedButtonStyles : closedButtonStyles),
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
                 }}
               >
-                <ListItemIcon
-                  sx={{
-                    ...(open ? openedIconStyles : closedIconStyles),
-                  }}
-                >
-                  {selectedCategory === category.name
-                    ? category.iconType1
-                    : category.iconType2}
-                </ListItemIcon>
-                <Typography
-                  sx={{
-                    fontFamily:
-                      '"Your Custom Font", "Microsoft YaHei", sans-serif',
-                    fontSize: "14px",
-                    fontWeight: 500,
-                    color: "#000",
-                    ...(open ? { marginLeft: "0px" } : { marginTop: "5px" }),
-                  }}
-                >
-                  {category.name}
-                </Typography>
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
-      </Drawer>
-    </div>
+                {isSelected ? category.iconType1 : category.iconType2}
+              </ListItemIcon>
+              <Typography
+                sx={{
+                  fontFamily:
+                    '"Your Custom Font", "Microsoft YaHei", sans-serif',
+                  fontSize: "14px",
+                  fontWeight: 500,
+                  color: "#000",
+                  mt: "5px",
+                }}
+              >
+                {category.name}
+              </Typography>
+            </ListItemButton>
+          </ListItem>
+        );
+      })}
+    </List>
   );
 };
 
