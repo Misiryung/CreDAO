@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Box, Stack, Typography } from "@mui/material";
-import { useParams } from "react-router-dom";
+import { Box } from "@mui/material";
+import { useParams, useNavigate } from "react-router-dom";
 import { searchVideos } from "../../api";
 import VideoList from "../video/list";
 import { VideoTypes } from "../video/types";
@@ -12,6 +12,7 @@ const Feed: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [videos, setVideos] = useState<VideoTypes[] | null>(null);
   const { searchTerm: paramSearchTerm } = useParams<{ searchTerm?: string }>();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (paramSearchTerm === undefined) {
@@ -36,17 +37,21 @@ const Feed: React.FC = () => {
   useEffect(() => {
     if (!selectedCategory) return;
 
+    if (selectedCategory === "首页") {
+      navigate("/首页");
+      return;
+    }
+
     searchVideos(selectedCategory)
       .then((data) => setVideos(data))
       .catch((error) => {
         console.error("Error fetching videos:", error);
         setVideos([]);
       });
-  }, [selectedCategory]);
+  }, [selectedCategory, navigate]);
 
   const handleCategoryChange = (category: string) => {
     setSelectedCategory(category);
-    setSearchTerm("");
   };
 
   return (
@@ -55,32 +60,32 @@ const Feed: React.FC = () => {
         width: "100%",
         height: "100%",
         display: "flex",
-        flexDirection: "row",
+        flexDirection: "column",
       }}
     >
-      <Box
-        sx={{
-          width: "80px",
-          height: "100%",
-        }}
-      >
-        <Sidebar
-          selectedCategory={selectedCategory}
-          setSelectedCategory={setSelectedCategory}
-        />
-      </Box>
+      <Navbar />
       <Box
         sx={{
           flex: 1,
           display: "flex",
-          flexDirection: "column",
-          height: "100%",
+          flexDirection: "row",
+          width: "100%",
+          height: `calc(100% - ${8}vh)`,
         }}
       >
-        <Navbar />
         <Box
           sx={{
-            width: `calc(100% - ${20}px)`,
+            width: "6vw",
+          }}
+        >
+          <Sidebar
+            selectedCategory={selectedCategory}
+            setSelectedCategory={handleCategoryChange}
+          />
+        </Box>
+        <Box
+          sx={{
+            width: `calc(100% - ${20}px - ${6}vw)`,
             marginRight: "20px",
             overflowY: "auto",
           }}
