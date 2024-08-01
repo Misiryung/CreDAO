@@ -19,7 +19,6 @@ const Feed: React.FC = () => {
       setSearchTerm("");
     } else {
       setSearchTerm(paramSearchTerm || "");
-      setSelectedCategory("");
     }
   }, [paramSearchTerm]);
 
@@ -39,18 +38,12 @@ const Feed: React.FC = () => {
 
     if (selectedCategory === "首页") {
       navigate("/首页");
-      return;
     }
-
-    searchVideos(selectedCategory)
-      .then((data) => setVideos(data))
-      .catch((error) => {
-        console.error("Error fetching videos:", error);
-        setVideos([]);
-      });
   }, [selectedCategory, navigate]);
 
-  const handleCategoryChange = (category: string) => {
+  const handleCategoryChange: React.Dispatch<React.SetStateAction<string>> = (
+    category: string | ((prevCategory: string) => string)
+  ) => {
     setSelectedCategory(category);
   };
 
